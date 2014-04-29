@@ -3,7 +3,7 @@ disp("Ausgabe 2")
 disp("")
 
 x = single([0.8:5e-05:1.2]); % Definieren der x Werte mit Datentyp single 
-p_f = (x.-1).**7;           % Faktorisierte Darstellung des Polynoms 
+p_f = (x.-1).**7;            % Faktorisierte Darstellung des Polynoms 
 p_h = ((((((((((((x.-7).*x).+21).*x).-35).*x).+35).*x).-21).*x).+7).*x).-1; % Horner Darstellung des Polynoms
 
 

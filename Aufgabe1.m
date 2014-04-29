@@ -47,12 +47,14 @@ end
 % Im Vergleich mit dem gegebenen Wert  exp(-5.5) = 0.0040867714 zeigt sich,
 % dass für n = 30 alle drei Ansätze das(bis auf die angegebene Stelle) gleiche Ergebnis 
 % liefern.
+
 % Für n < 30 sind die Werte der drei Ansätze, jedoch unterschiedlich und konvergieren 
 % unterschiedlich schnell. So ist der erste Ansatz erst nach n=30 und der zweite erstnach n=24 
 % Summanden bei der Genauigkeit die der dritte Ansatz schon bei n = 9 besitzt. 
 % Der Grund dafür ist, dass in der Summe des ersten Ansatzes zunächst große Zahlen 
 % addiert und subtrahiert werden, die erst für große n kleiner werden,
 % sodass auch er Summenwert für keine n sehr groß ist.
+
 % Verbesserung wird in Ansatz zwei erziehlt in dem zunächst der Summenwert der Inversen Summe berechnet
 % und dannach durch Invertierung der gewünschte Wert berechnet wird.
 % Dies füht zu besseren Ergbnissen, da die Inverse Summe schneller wächst und man durch die Invertierung des
