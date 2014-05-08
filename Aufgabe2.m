@@ -12,5 +12,8 @@ hold on
 plot(x, p_f) % und er faktoriesierten Darstellung in einem Plot
 legend( "horner","faktor") % Legende zur Untesrscheidung beider Plots
 
-
-
+% Die Auswertung des Polynoms mittels der Hornerform führt 
+% für den Datentyp single zu Oszillation der Funktionswerte 
+% um die x-Achse.
+% Dies liegt daran, dass in der Hornerform mehr Operationen durchgeführt
+% und dabei mehr Rundungsfehler gemacht werden.
