@@ -83,27 +83,27 @@ endfunction
 
 
 a = 0;
-b = 10;
+b = 2;
 
 % Polynom 2. Grades
-f_2 = @(x) x^2 + x; % I(f) = 383 + 1/3
+f_2 = @(x) x^2; % I(f) = 8/3
 % Analytisches Ergebnis
-I_f_2 = 383 + 1/3;
+I_f_2 = 8/3;
 
 % Polynom 3. Grades
-f_3 = @(x) x^3 - 2*x; % I(f) = 2400
+f_3 = @(x) x^3; % I(f) = 4
 % Analytisches Ergebnis
-I_f_3 = 2400;
+I_f_3 = 4;
 
 % Polynom 4. Grades
-f_4 = @(x) x^4 - x^2 + x; % I(f) = 19716 + 2/3
+f_4 = @(x) x^4; % I(f) = 6.4
 % Analytisches Ergebnis
-I_f_4 =  19716 + 2/3;
+I_f_4 =  6.4;
 
 % Polynom 5. Grades
-f_5 = @(x) x^5 + 4*x^3 - x^2; % I(f) = 176333 + 1/3
+f_5 = @(x) x^5; % I(f) = 32/3
 % Analytisches Ergebnis
-I_f_5 = 176333 + 1/3;
+I_f_5 = 32/3;
 
 
 p_T = [0 1]; % Trapez-Regel
@@ -125,7 +125,7 @@ end
 Grad2 = figure;
 title("Ploynom 2.Grades"); 
 hold on;
-bar(N, [R_T_2; R_S_2; R_M_2]',"grouped");
+bar(N, [R_T_2; R_S_2; R_M_2]',"stacked");
 hold off;
 
 for i = [1:3]
@@ -136,7 +136,7 @@ end
 Grad3 = figure;
 title("Ploynom 3.Grades");
 hold on;
-bar(N, [R_T_2; R_S_2; R_M_2]',"grouped");
+bar(N, [R_T_2; R_S_2; R_M_2]',"stacked");
 hold off;
 
 for i = [1:3]
@@ -147,7 +147,7 @@ end
 Grad3 = figure;
 title("Ploynom 4.Grades");
 hold on;
-bar(N, [R_T_2; R_S_2; R_M_2]',"grouped");
+bar(N, [R_T_2; R_S_2; R_M_2]',"stacked");
 hold off;
 
 for i = [1:3]
@@ -158,7 +158,7 @@ end
 Grad3 = figure;
 title("Ploynom 5.Grades");
 hold on;
-bar(N, [R_T_2; R_S_2; R_M_2]',"grouped");
+bar(N, [R_T_2; R_S_2; R_M_2]',"stacked");
 hold off;
 
 %{

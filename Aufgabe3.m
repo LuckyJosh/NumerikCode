@@ -49,10 +49,11 @@ endfunction
 
 
 
-function myNewtonInterpolTest()
+function myNewtonInterpolTest(n)
+
 # Runge Funktion 
 runge = @(x) 1./(((x.^2).*25).+1);
-n = 17;
+
 # äquidistant
 x_a = linspace(-1,1, n + 1);
 y_a = runge(x_a);
@@ -60,8 +61,8 @@ y_a = runge(x_a);
 # Tschebyscheff
 tscheby = @(i, n) cos((((2.*i).+1).*pi)/(2*n + 2));
 i = [0:n];
-x_t = tscheby(i,n)
-y_t = runge(x_t)
+x_t = tscheby(i,n);
+y_t = runge(x_t);
 
 #X-Werte
 X = linspace(-1,1,100);
@@ -69,14 +70,12 @@ X = linspace(-1,1,100);
 #Plot Runge
 plot(X, runge(X), 'g');
 hold on
+
 #Plot Äquidistante Knoten
 plot(x_a, y_a, 'rx', "markersize",20);
-hold on
+
 #Plot Tschebyscheff Knoten
 plot(x_t, y_t, 'bx', "markersize",20);
-hold on
-# Plot-Legende 
-legend("Runge Funktion", "Äquidistante Konten", "Tschebyscheff Knoten");
 
 #Newton Polynom, Äquidistant
 P_a = myNewtonPolynomial(X, x_a, myNewtonInterpol(x_a, y_a));
@@ -86,13 +85,37 @@ plot(X, P_a, "r")
 P_t = myNewtonPolynomial(X, x_t, myNewtonInterpol(x_t, y_t));
 plot(X, P_t, "b")
 
+# Plot-Legende 
+xlabel("x")
+ylabel("y")
+legend("Runge Funktion", "Äquidistante Konten", "Tschebyscheff Knoten","Interpolation Äquidist.", "Interpolation Tschebyscheff");
+t = strjoin({'Newtoninterpolation mit äquidistanten und Tschebyscheff Knoten n = ', num2str(n)});
+title(t);
+
+# Fehler
+D = linspace(-1,1, 101);
+for i = [1: length(D)]
+    R_a(i) = abs(runge(D(i)) - myNewtonPolynomial(D(i), x_a, myNewtonInterpol(x_a, y_a)));
+    R_t(i) = abs(runge(D(i)) - myNewtonPolynomial(D(i), x_t, myNewtonInterpol(x_t, y_t)));
+end
+    disp(num2str(n))
+    ErrorA = max(R_a)
+    ErrorT = max(R_t)
+    
 endfunction
 
 
-myNewtonInterpolTest()
-#c = myNewtonInterpol([0,1,3,4,6], [1,3,2,4,6]);
-#X = linspace(-10,10, 1000);
-#p = myNewtonPolynomial(X, [0,1,3,4,6], c);
-#plot([0,1,3,4,6], [1,3,2,4,6], "rx")
-#hold on
-#plot(X, p)
+
+for n=[7, 12, 17]
+    figure
+    myNewtonInterpolTest(n);
+end
+%{
+
+c = myNewtonInterpol([0,1,3,4,6], [1,3,2,4,6]);
+X = linspace(-10,10, 1000);
+p = myNewtonPolynomial(X, [0,1,3,4,6], c);
+plot([0,1,3,4,6], [1,3,2,4,6], "rx")
+hold on
+plot(X, p)
+%}
