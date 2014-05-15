@@ -1,5 +1,4 @@
 format long
-clear
 
 function [v]=myQuadratur1D(f,w,p,a,b,N)
   %{
@@ -81,139 +80,118 @@ function [v]=myQuadratur1D(f,w,p,a,b,N)
   v = v * h;
 endfunction
 
-
-a = 0;
-b = 2;
-
-% Polynom 2. Grades
-f_2 = @(x) x^2; % I(f) = 8/3
-% Analytisches Ergebnis
-I_f_2 = 8/3;
-
-% Polynom 3. Grades
-f_3 = @(x) x^3; % I(f) = 4
-% Analytisches Ergebnis
-I_f_3 = 4;
-
-% Polynom 4. Grades
-f_4 = @(x) x^4; % I(f) = 6.4
-% Analytisches Ergebnis
-I_f_4 =  6.4;
-
-% Polynom 5. Grades
-f_5 = @(x) x^5; % I(f) = 32/3
-% Analytisches Ergebnis
-I_f_5 = 32/3;
-
-
-p_T = [0 1]; % Trapez-Regel
-w_T = [0.5 0.5]; % Trapez-Regel
-
-p_S = [0 1/2 1]; % Simpson-Regel
-w_S = [1/6 4/6 1/6]; % Simpson-Regel
-
-p_M = [0 1/4 1/2 3/4 1]; % Milne-Regel
-w_M = [7/90 32/90 12/90 32/90 7/90]; % Milne-Regel
-
-# Vergleich der Genauigkeit für Polynom 
-N = [10, 100, 1000];
-for i = [1:3]
-    R_T_2(i) = abs(I_f_2 - myQuadratur1D(f_2, w_T, p_T, a, b, N(i)));
-    R_S_2(i) = abs(I_f_2 - myQuadratur1D(f_2, w_S, p_S, a, b, N(i)));
-    R_M_2(i) = abs(I_f_2 - myQuadratur1D(f_2, w_M, p_M, a, b, N(i)));
-end
-Grad2 = figure;
-title("Ploynom 2.Grades"); 
-hold on;
-bar(N, [R_T_2; R_S_2; R_M_2]',"stacked");
-hold off;
-
-for i = [1:3]
-    R_T_2(i) = abs(I_f_3 - myQuadratur1D(f_3, w_T, p_T, a, b, N(i)));
-    R_S_2(i) = abs(I_f_3 - myQuadratur1D(f_3, w_S, p_S, a, b, N(i)));
-    R_M_2(i) = abs(I_f_3 - myQuadratur1D(f_3, w_M, p_M, a, b, N(i)));
-end
-Grad3 = figure;
-title("Ploynom 3.Grades");
-hold on;
-bar(N, [R_T_2; R_S_2; R_M_2]',"stacked");
-hold off;
-
-for i = [1:3]
-    R_T_2(i) = abs(I_f_4 - myQuadratur1D(f_4, w_T, p_T, a, b, N(i)));
-    R_S_2(i) = abs(I_f_4 - myQuadratur1D(f_4, w_S, p_S, a, b, N(i)));
-    R_M_2(i) = abs(I_f_4 - myQuadratur1D(f_4, w_M, p_M, a, b, N(i)));
-end
-Grad3 = figure;
-title("Ploynom 4.Grades");
-hold on;
-bar(N, [R_T_2; R_S_2; R_M_2]',"stacked");
-hold off;
-
-for i = [1:3]
-    R_T_2(i) = abs(I_f_5 - myQuadratur1D(f_5, w_T, p_T, a, b, N(i)));
-    R_S_2(i) = abs(I_f_5 - myQuadratur1D(f_5, w_S, p_S, a, b, N(i)));
-    R_M_2(i) = abs(I_f_5 - myQuadratur1D(f_5, w_M, p_M, a, b, N(i)));
-end
-Grad3 = figure;
-title("Ploynom 5.Grades");
-hold on;
-bar(N, [R_T_2; R_S_2; R_M_2]',"stacked");
-hold off;
-
+function myPolynomVergleich(n, f, I_f, W, P, a, b, N)
 %{
-for N = [10, 100, 1000]
-    p = [0 1]; % Trapez-Regel
-    w = [0.5 0.5]; % Trapez-Regel
-    printf("Trapez-Regel:")
-    printf("N = ");
-    printf(num2str(N));
-    printf(" Grad 2\n");
-    I_2 = myQuadratur1D(f_2, w, p, a, b, N)    
-    printf(" Grad 3\n");
-    I_3 = myQuadratur1D(f_3, w, p, a, b, N)    
-    printf(" Grad 4\n");
-    I_4 = myQuadratur1D(f_4, w, p, a, b, N)    
-    printf(" Grad 5\n");
-    I_5 = myQuadratur1D(f_5, w, p, a, b, N)
-    printf("\n\n")
-    p = [0 1/2 1]; % Simpson-Regel
-    w = [1/6 4/6 1/6]; % Simpson-Regel
-    printf("Simpson-Regel:")
-    printf("N = ");
-    printf(num2str(N));
-    printf(" Grad 2\n");
-    I_2 = myQuadratur1D(f_2, w, p, a, b, N)    
-    printf(" Grad 3\n");
-    I_3 = myQuadratur1D(f_3, w, p, a, b, N)    
-    printf(" Grad 4\n");
-    I_4 = myQuadratur1D(f_4, w, p, a, b, N)    
-    printf(" Grad 5\n");
-    I_5 = myQuadratur1D(f_5, w, p, a, b, N)
-    printf("\n\n")
-    p = [0 1/4 1/2 3/4 1]; % Milne-Regel
-    w = [7/90 32/90 12/90 32/90 7/90]; % Milne-Regel
-    printf("Milne-Regel:")
-    printf("N = ");
-    printf(num2str(N));
-    printf(" Grad 2\n");
-    I_2 = myQuadratur1D(f_2, w, p, a, b, N)    
-    printf(" Grad 3\n");
-    I_3 = myQuadratur1D(f_3, w, p, a, b, N)    
-    printf(" Grad 4\n");
-    I_4 = myQuadratur1D(f_4, w, p, a, b, N)    
-    printf(" Grad 5\n");
-    I_5 = myQuadratur1D(f_5, w, p, a, b, N)
-    printf("\n\n")
-end
+ Funktion zur Erstellung des Plots zum Vergleich der 
+ der Genauigkeit der Quadraturformeln.
+ 
+ Parameter:
+ n - Grad des Polynoms
+ f - Polynom (function_handle)
+ I_f - Analytische Lösung
+ W - Gewichte aller drei Quadraturformeln
+ P - Quadraturpunkte aller drei Quadraturformeln 
+ a - Intervallanfang
+ b - Intervallende
+ N - Anzahl der Teilintervalle
 %}
+  
+  % Berechnung der Abweichung für jedes N und jede Quadratur
+  for i = [1:length(N)]
+    R_T(i) = abs(I_f - myQuadratur1D(f, W(1:2), P(1:2), a, b, N(i)));
+    R_S(i) = abs(I_f - myQuadratur1D(f, W(3:5), P(3:5), a, b, N(i)));
+    R_M(i) = abs(I_f - myQuadratur1D(f, W(6:10), P(6:10), a, b, N(i)));
+  end
+  % Plot der Abweichung gegen das jeweilige N
+  figure;
+  t = strjoin({"Abweichung der Quadraturen","Ploynom ", num2str(n), ". Grades"});
+  title(t); 
+  hold on;
+  %bar(N, [R_T; R_S; R_M]',"stacked");
+  stem(N, R_T, "r");
+  stem(N, R_S, "b");
+  stem(N, R_M, "g");
+  xlabel("Anzahl der Teilintervalle N")
+  ylabel("Absolute Abweichung er Quadratur vom Polynom")
+  legend("Trapez-Regel", "Simpson-Regel", "Milne-Regel")
+  hold off;
 
-% Vergleich der Genauigkeit für das Polynom 2. Grades
+endfunction
+
+function myQuadratur1DTest()
+  %{
+    Funktion zum Testen der Funktion 'myQuadratur1D'.
+    Der Test wird mit den vier Funktionen
+    f_2(x) = x^2, f_3(x) = x^3, f_4(x) = x^4 und 
+    f_5(x) = x^5 unter Verwendung aller Quadraturformeln
+    durchgeführt.
+    
+    Die Abweichungen der Quadraturformeln von den Funktionen 
+    werden in einem Plot veranschaulicht. 
+  %}
+
+  
+  % Integrationsintervall von a bis b
+  a = 0;
+  b = 2;
+
+  % Polynom 2. Grades
+  f_2 = @(x) x^2; % I(f) = 8/3
+  % Analytisches Ergebnis
+  I_f_2 = 8/3;
+
+  % Polynom 3. Grades
+  f_3 = @(x) x^3; % I(f) = 4
+  % Analytisches Ergebnis
+  I_f_3 = 4;
+
+  % Polynom 4. Grades
+  f_4 = @(x) x^4; % I(f) = 6.4
+  % Analytisches Ergebnis
+  I_f_4 =  6.4;
+
+  % Polynom 5. Grades
+  f_5 = @(x) x^5; % I(f) = 32/3
+  % Analytisches Ergebnis
+  I_f_5 = 32/3;
+
+  % Quadraturpunkte und -gewichte der jeweiligen Quadraturformel
+  p_T = [0 1]; % Trapez-Regel
+  w_T = [0.5 0.5]; % Trapez-Regel
+
+  p_S = [0 1/2 1]; % Simpson-Regel
+  w_S = [1/6 4/6 1/6]; % Simpson-Regel
+
+  p_M = [0 1/4 1/2 3/4 1]; % Milne-Regel
+  w_M = [7/90 32/90 12/90 32/90 7/90]; % Milne-Regel
+
+  % Anzahl der Teilintervalle
+  N = [10, 100, 1000];
+  
+  % Vergleich der Genauigkeit für das Polynom 2. Grades
+  myPolynomVergleich(2, f_2, I_f_2, [w_T, w_S, w_M], [p_T, p_S, p_M], a, b, N)
+
+  % Vergleich der Genauigkeit für das Polynom 3. Grades
+  myPolynomVergleich(3, f_3, I_f_3, [w_T, w_S, w_M], [p_T, p_S, p_M], a, b, N)
+
+  % Vergleich der Genauigkeit für das Polynom 4. Grades
+  myPolynomVergleich(4, f_4, I_f_4, [w_T, w_S, w_M], [p_T, p_S, p_M], a, b, N)
+
+  % Vergleich der Genauigkeit für das Polynom 5. Grades
+   myPolynomVergleich(5, f_5, I_f_5, [w_T, w_S, w_M], [p_T, p_S, p_M], a, b, N)
 
 
-%I = myQuadratur1D(f,w,p,a,b,N);
+end
 
 
-%printf("I_h(f) = ")
-%printf(num2str(I))
-%printf("\n")
+myQuadratur1DTest()
+
+% Der Vergleich der Abweichungen vom Polynom zeigt zum einen,
+% das die Genauigkeit der Quadratur mit zunehmender Anzahl an Teilintervallen zu nimmt. 
+% Weiter lässt sich erkennen, dass die Trapezregel für Polynome 
+% höheren Grades immer ungenauer wird.
+% Dahingegen sind die Simpson- und Milne-Regel auf bei Polynomen 
+% so genau, dass nur ein sehr geringer Unterschied besteht.
+% Da der Fehler der Milne-Regel von der 6. Ableitung der Funktion abhängt,
+% wird f von dieser sogar exakt integriert.    
+
