@@ -25,14 +25,12 @@ function myPolynomVergleich(n, f, I_f, W, P, a, b, N)
   title(t); 
   hold on;
   
-  %bar(N, [R_T; R_S; R_M]','stacked');
   stem(N, R_T, 'r');
   stem(N, R_S, 'b');
   stem(N, R_M, 'g');
   xlabel('Anzahl der Teilintervalle N');
   ylabel('Absolute Abweichung er Quadratur vom Polynom');
   legend('Trapez-Regel', 'Simpson-Regel', 'Milne-Regel');
-  set(gca,'yscal','log', 'xscal', 'log');
   hold off;
 
 end
