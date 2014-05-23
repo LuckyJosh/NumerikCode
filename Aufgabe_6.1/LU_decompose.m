@@ -10,26 +10,16 @@ function [LU] = LU_decompose(A)
 
     n = size(A, 1);
     U = A;
-
-    G = cell(1, n-1);
-    Ginv = cell(1, n-1);
-
-    for i = 1:n-1
-        G{i} = eye(n,n);
-        Ginv{i} = eye(n,n);
-        for j= i+1:n
-            G{i}(j,i) = - U(j,i)/U(i,i);
-            Ginv{i}(j,i) = - G{i}(j,i);
-        end
-        U = G{i} * U;
-    end
-
+    
     L = eye(n,n);
-    for i = n-1: -1: 1
-        L = Ginv{i} * L;
+    for i = 1:n-1
+        G = eye(n,n);
+        Ginv = eye(n,n);
+        G(i+1:n,i) = - U(i+1:n,i)/U(i,i);
+        Ginv(i+1:n,i) = U(i+1:n,i)/U(i,i);
+        U = G * U;
+        L = L * Ginv;
     end
     L  = L - eye(n,n);
-
     LU = L+U;
 end
-
