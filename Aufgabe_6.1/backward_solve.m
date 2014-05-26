@@ -1,13 +1,16 @@
-function z = forward_solve(LU, b)
+function x = backward_solve(LU, z)
 %
 %   
     n = size(LU, 1);
-    L = LU - triu(LU) + eye(n,n);
-    z = b;
-    L = -1 * L + 2*eye(n,n);
+    U = triu(LU);
+    U_diag = repmat(diag(U), 1, n);
     
-    for i=1:n
-       z(i) = L(i, 1:n) * z(1:n); 
+    x(1:n,1) = z(1:n,1)./U_diag(1:n,1);
+    U(1:n,1:n) = U(1:n,1:n)./U_diag(1:n,1:n);
+    U = -1 * U + 2*eye(n,n);
+    
+    for i=n:-1:1
+       x(i) = U(i, n:-1:1) * x(n:-1:1); 
     end
     
     
