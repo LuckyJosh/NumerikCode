@@ -26,8 +26,12 @@ end
 
 % Ausgabe der Ergebnisse
 for i = 1:5
-    fprintf('%i. Ergbnis der LU-Zerlegung:\n',i);
+    fprintf('%i. Matrix des LGS\n', i);
+    disp(M{i});
+    fprintf('\n%i. Rechte Seite des LGS\n', i);
+    disp(b{i});
+    fprintf('\n%i. Ergebnis der LU-Zerlegung:\n',i);
     disp(x{i});
-    fprintf('\n %i. Ergbnis mit M\\b:\n', i);
+    fprintf('\n%i. Ergbnis mit M\\b:\n', i);
     disp(X{i});
 end
