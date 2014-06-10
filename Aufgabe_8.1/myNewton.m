@@ -1,7 +1,6 @@
-function [ output_args ] = myNewton( input_args )
-%MYNEWTON Summary of this function goes here
-%   Detailed explanation goes here
-
+function [x,e,v] = myNewton(f, df, x0)
+    
+    
 
 end
 
