@@ -4,10 +4,18 @@ function [ A,b ] = my_test_system( n )
 % Erstellen des Vektors b
 b = ones(n^2,1);
 
+
+
 % n x n Einheitsmatrx
-Id = ones(n);
+Id = diag(ones(n,1));
+
+% n x n Einsmatrix
+E = ones(n);
+
 % Besetzen der Submatrix T
-T = - Id + tril(Id,-2) + triu(Id,2) + 5*eye(n); 
+T = - E + tril(E,-2) + triu(E,2) + 5*eye(n); 
+
+% Besetzen der Matrix
 A = zeros(n^2);
 for i = 1:n:n^2
     if i < n^2-n

@@ -1,11 +1,8 @@
 function [ x,numit ] = my_gauss_seidel( A,b,x0,exp,maxit )
 
-% Dimension der Matrix A 
-n = size(A,1);
-
 % Untere Dreiecksmatrix von A  + Diagonalatrix von A
 DL = tril(A);
-norm(inv(DL)*(A - DL))
+
 % Setzen der Starwerte
 k = 1;
 x = x0;
@@ -28,9 +25,9 @@ numit = k-1;
 % gebrauchten Iterationen
 
 if k-1 == maxit
-    fprintf('Die Berechnung wurde nach %i Iterationen abgebrochen!',k-1)
+    fprintf('Die Berechnung wurde nach %i Iterationen abgebrochen!\n',k-1)
 else
-    fprintf('Die Berechnung wurde nach %i Iterationen erfolgreich beendet!', k-1)
+    fprintf('Die Berechnung wurde nach %i Iterationen erfolgreich beendet!\n', k-1)
 end
 
 end

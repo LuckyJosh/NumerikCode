@@ -7,8 +7,6 @@ n = size(A,1);
 % Diagonalatrix der Matrix A
 D = A - tril(A,-1) - triu(A,1);
 
-norm(inv(D)*(A - D))
-
 % Setzen der Starwerte
 k = 1;
 x = x0;
@@ -31,9 +29,9 @@ numit = k-1;
 % gebrauchten Iterationen
 
 if k-1 == maxit
-    fprintf('Die Berechnung wurde nach %i Iterationen abgebrochen!',k-1)
+    fprintf('Die Berechnung wurde nach %i Iterationen abgebrochen!\n',k-1)
 else
-    fprintf('Die Berechnung wurde nach %i Iterationen erfolgreich beendet!', k-1)
+    fprintf('Die Berechnung wurde nach %i Iterationen erfolgreich beendet!\n', k-1)
 end
 
 end
